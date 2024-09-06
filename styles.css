@@ -1,4 +1,4 @@
-/* Reset */
+/* Reset default styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,109 +10,68 @@ html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Full-height layout with animated gradient */
-body {
-    background: linear-gradient(135deg, #2E3440, #3B4252, #4C566A);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+/* Background container with PNG image */
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('img/1308601.png'); /* Replace with the path to your PNG image */
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    position: relative;
 }
 
-/* Animated gradient shifting */
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Background particle animation */
-.background-animation {
+/* Semi-transparent gradient overlay */
+.gradient-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15), transparent);
-    animation: particles 20s linear infinite;
-    z-index: -1;
+    background: linear-gradient(135deg, rgba(46, 52, 64, 0.3), rgba(67, 76, 89, 0.3)); /* Light gradient overlay */
+    pointer-events: none; /* Allow clicks to pass through */
 }
 
-@keyframes particles {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(-50px, -50px);
-    }
-}
-
-/* Container that holds the iframe */
-.container {
+/* Blurred background behind the iframe */
+.blur-background {
+    position: relative;
     width: 90%;
     max-width: 800px;
-    text-align: center;
-}
-
-/* Iframe wrapper with glow effect and shadow */
-.iframe-wrapper {
-    background: rgba(59, 66, 82, 0.9); /* Transparent background */
     padding: 20px;
+    backdrop-filter: blur(20px); /* Apply blur to the background */
     border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    border: 1px solid #81A1C1; /* Light blue Nord border */
-    animation: fadeIn 1.5s ease, zoomIn 2s ease;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 2px solid #88C0D0; /* Nord-themed border color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Glowing hover effect */
-.iframe-wrapper:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 45px rgba(129, 161, 193, 0.7);
-    border-color: #88C0D0;
-}
-
-/* Fade-in and zoom-in animation for iframe */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes zoomIn {
-    0% {
-        transform: scale(0.9);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Iframe styling */
+/* Iframe directly on the blurred background */
 iframe {
     width: 100%;
-    height: 300px;
-    border-radius: 10px;
+    height: 350px;
     border: none;
-    transition: all 0.3s ease-out;
+    background-color: transparent; /* Ensure iframe is transparent */
+    transition: transform 0.3s ease;
 }
 
-/* Iframe responsive scaling */
-@media (max-width: 600px) {
+/* Enhance focus effect */
+.blur-background:hover {
+    transform: scale(1.05); /* Slight scale on hover */
+    box-shadow: 0 16px 60px rgba(129, 161, 193, 0.7); /* Soft blue glow */
+}
+
+/* Keep iframe in focus on hover */
+.blur-background:hover iframe {
+    transform: scale(1); /* Keep iframe scaling in sync with container */
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
     iframe {
         height: 250px;
     }
